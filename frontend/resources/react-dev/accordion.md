@@ -9,8 +9,6 @@ Links:
 - [Recap](https://react.dev/learn/sharing-state-between-components#recap "Link for Recap")
 - [CodeSandbox code](https://codesandbox.io/p/sandbox/nt8zkz?file=%2Fsrc%2FFAQ.jsx)
 - [CodeSandbox render deploy](https://nt8zkz.csb.app/)
-  
-  
 
 **Key ideas**
 
@@ -513,7 +511,7 @@ Remember to <mark>handle potential errors when working with `localStorage`</mark
 
 In our FAQ example, `localStorage` is used to remember which panels were open, providing a consistent user experience across page reloads or revisits to the site.
 
-### Code
+#### Code
 
 `localStorage` is used in this example <mark>to persist the state of the accordion</mark> across page reloads or browser sessions.
 
@@ -524,7 +522,6 @@ In our FAQ example, `localStorage` is used to remember which panels were open, p
      const saved = localStorage.getItem('accordionState');
      return saved ? new Set(JSON.parse(saved)) : new Set();
    });
-   
    ```
    
    - When the component first mounts, it tries to retrieve the saved state from localStorage.
@@ -539,7 +536,6 @@ In our FAQ example, `localStorage` is used to remember which panels were open, p
    useEffect(() => {
      localStorage.setItem('accordionState', JSON.stringify(Array.from(activePanels)));
    }, [activePanels]);
-   
    ```
    
    - This `useEffect` hook runs whenever `activePanels` changes.
@@ -579,8 +575,6 @@ Here's how it works in practice:
    - `localStorage` has a size limit (usually about **5MB-10MB**).
    
    - It's synchronous, <mark>so large operations could potentially block the main thread</mark>.
-
-
 
 ### Toogle
 
