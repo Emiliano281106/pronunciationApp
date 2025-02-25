@@ -1,16 +1,25 @@
 # PronunciationApp Frontend v0.4
 
+## Introduction
+
 Links:
 
+- [accordion.md at frontend-react](https://github.com/AlbertProfe/pronunciationApp/blob/frontend-react/frontend/resources/react-dev/accordion.md)
 
+`React.dev`
 
 - [Sharing State Between Components](https://react.dev/learn/sharing-state-between-components)
 - [Controlled and uncontrolled components](https://react.dev/learn/sharing-state-between-components#controlled-and-uncontrolled-components)
 - [Recap](https://react.dev/learn/sharing-state-between-components#recap "Link for Recap")
+
+`CodeSanbox`
+
 - [CodeSandbox code](https://codesandbox.io/p/sandbox/nt8zkz?file=%2Fsrc%2FFAQ.jsx)
 - [CodeSandbox render deploy](https://nt8zkz.csb.app/)
 
-In this version we are going to add a new FAQ page to our `PronunciationApp`, considering that we're using `Material-UI`, `React Router`, and `Axios`.
+## Adding FAQs
+
+> In this version we are going to add a new FAQ page to our `PronunciationApp`, considering that we're using `Material-UI`, `React Router`, and `Axios`.
 
 Here's a step-by-step process:
 
@@ -236,13 +245,13 @@ This implementation does the following:
 
 2. **Persisting State**:
    
-   - We use a `useEffect` hook to save the current state of `expandedPanels` to localStorage whenever it changes.
+   - We use a `useEffect` hook to save the current state of `expandedPanels` to `localStorage` whenever it changes.
    
    - The Set is converted to an array and then to a JSON string for storage.
 
 3. **Handling Expansion**:
    
-   - The `handleChange` function now updates the `expandedPanels` Set, adding or removing panel names as they are expanded or collapsed.
+   - The `handleChange` function now updates the `expandedPanels` <mark>Set</mark>, adding or removing panel names as they are expanded or collapsed.
 
 4. **Rendering**:
    
@@ -250,10 +259,8 @@ This implementation does the following:
 
 This approach ensures that:
 
-- The state of expanded FAQ items persists across page reloads.
-
+- The `state` of expanded FAQ items <mark>persists across page reloads</mark>.
 - Users can pick up where they left off when they return to the FAQ page.
-
-- The implementation is efficient, using a Set for quick lookups and updates.
+- The implementation is efficient, using a <mark>Set</mark> for quick lookups and updates.
 
 Remember to test this implementation thoroughly, especially in different browsers and private browsing modes, as localStorage behavior can vary slightly in these contexts.
