@@ -1,0 +1,28 @@
+[
+  {
+    "index": 0,
+    "question": "What is PronounceRight?",
+    "answer": "PronounceRight is an innovative app designed to help users improve their pronunciation skills in multiple languages. It uses advanced speech recognition technology to provide real-time feedback on your pronunciation."
+  },
+  {
+    "index": 1,
+    "question": "How many languages does PronounceRight support?",
+    "answer": "Currently, PronounceRight supports 10 major languages, including English, Spanish, French, German, Italian, Chinese (Mandarin), Japanese, Korean, Russian, and Arabic. We're constantly working on adding more languages to our platform."
+  },
+  {
+    "index": 2,
+    "question": "Is PronounceRight suitable for beginners?",
+    "answer": "Absolutely! PronounceRight is designed for language learners of all levels, from complete beginners to advanced speakers looking to refine their accent. Our app offers difficulty levels and customized learning paths to suit your proficiency."
+  },
+  {
+    "index": 3,
+    "question": "How does the speech recognition technology work?",
+    "answer": "PronounceRight uses state-of-the-art AI-powered speech recognition. When you speak into the app, it analyzes your pronunciation, compares it to native speaker models, and provides instant feedback on accuracy, including specific areas for improvement."
+  },
+  {
+    "index": 4,
+    "question": "Can I use PronounceRight offline?",
+    "answer": "While most features require an internet connection for optimal performance, PronounceRight does offer a limited offline mode. You can download certain lessons and practice materials for offline use, but real-time speech recognition requires an internet connection."
+  }
+]
+
