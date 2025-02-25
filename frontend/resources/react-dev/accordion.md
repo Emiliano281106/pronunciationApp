@@ -1,10 +1,16 @@
 # Accordion
 
+## Introduction
+
 Links:
 
 - [Sharing State Between Components](https://react.dev/learn/sharing-state-between-components)
 - [Controlled and uncontrolled components](https://react.dev/learn/sharing-state-between-components#controlled-and-uncontrolled-components)
 - [Recap](https://react.dev/learn/sharing-state-between-components#recap "Link for Recap")
+- [CodeSandbox code](https://codesandbox.io/p/sandbox/nt8zkz?file=%2Fsrc%2FFAQ.jsx)
+- [CodeSandbox render deploy](https://nt8zkz.csb.app/)
+  
+  
 
 **Key ideas**
 
@@ -26,6 +32,20 @@ By combining these two, React lets you create reusable components that are flexi
 ```jsx
 import { useState } from 'react';
 
+export default function Accordion() {
+  return (
+    <>
+      <h2>Almaty, Kazakhstan</h2>
+      <Panel title="About">
+        With a population of about 2 million, Almaty is Kazakhstan's largest city. From 1929 to 1997, it was its capital city.
+      </Panel>
+      <Panel title="Etymology">
+        The name comes from <span lang="kk-KZ">алма</span>, the Kazakh word for "apple" and is often translated as "full of apples". In fact, the region surrounding Almaty is thought to be the ancestral home of the apple, and the wild <i lang="la">Malus sieversii</i> is considered a likely candidate for the ancestor of the modern domestic apple.
+      </Panel>
+    </>
+  );
+}
+
 function Panel({ title, children }) {
   const [isActive, setIsActive] = useState(false);
   return (
@@ -39,20 +59,6 @@ function Panel({ title, children }) {
         </button>
       )}
     </section>
-  );
-}
-
-export default function Accordion() {
-  return (
-    <>
-      <h2>Almaty, Kazakhstan</h2>
-      <Panel title="About">
-        With a population of about 2 million, Almaty is Kazakhstan's largest city. From 1929 to 1997, it was its capital city.
-      </Panel>
-      <Panel title="Etymology">
-        The name comes from <span lang="kk-KZ">алма</span>, the Kazakh word for "apple" and is often translated as "full of apples". In fact, the region surrounding Almaty is thought to be the ancestral home of the apple, and the wild <i lang="la">Malus sieversii</i> is considered a likely candidate for the ancestor of the modern domestic apple.
-      </Panel>
-    </>
   );
 }
 ```
@@ -168,6 +174,55 @@ For `<Panel title="Etymology">...</Panel>`:
   ```textile
   The name comes from алма...
   ```
+
+## React.dev code
+
+```jsx
+import { useState } from 'react';
+
+export default function Accordion() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  return (
+    <>
+      <h2>Almaty, Kazakhstan</h2>
+      <Panel
+        title="About"
+        isActive={activeIndex === 0}
+        onShow={() => setActiveIndex(0)}
+      >
+        With a population of about 2 million, Almaty is Kazakhstan's largest city. From 1929 to 1997, it was its capital city.
+      </Panel>
+      <Panel
+        title="Etymology"
+        isActive={activeIndex === 1}
+        onShow={() => setActiveIndex(1)}
+      >
+        The name comes from <span lang="kk-KZ">алма</span>, the Kazakh word for "apple" and is often translated as "full of apples". In fact, the region surrounding Almaty is thought to be the ancestral home of the apple, and the wild <i lang="la">Malus sieversii</i> is considered a likely candidate for the ancestor of the modern domestic apple.
+      </Panel>
+    </>
+  );
+}
+
+function Panel({
+  title,
+  children,
+  isActive,
+  onShow
+}) {
+  return (
+    <section className="panel">
+      <h3>{title}</h3>
+      {isActive ? (
+        <p>{children}</p>
+      ) : (
+        <button onClick={onShow}>
+          Show
+        </button>
+      )}
+    </section>
+  );
+}
+```
 
 ## Decoupled Accordion
 
@@ -411,3 +466,78 @@ export default Accordion;
 - **Privacy Mode**: localStorage might not work in private browsing modes of some browsers.
 
 Remember to <mark>handle potential errors when working with `localStorage`</mark>, as it might be disabled in some browser settings.
+
+#### Toogle
+
+> In essence, this function toggles the visibility of a FAQ item. If the item was visible (in the Set), it becomes hidden (removed from the Set), and vice versa. This approach allows multiple panels to be open simultaneously while providing individual control over each panel's visibility.
+
+```jsx
+const togglePanel = (index) => {
+  setActivePanels(prev => {
+    const newSet = new Set(prev);
+    if (newSet.has(index)) {
+      newSet.delete(index);
+    } else {
+      newSet.add(index);
+    }
+    return newSet;
+  });
+};
+```
+
+1. **Function Definition**:  
+   `togglePanel` is a function that takes an `index` as an argument. This index represents the FAQ item being toggled.
+
+2. **State Update**:  
+   It uses `setActivePanels` to update the state. In React, when updating state based on the previous state, it's recommended to use a function inside the state setter.
+
+3. **Previous State**:  
+   `prev => { ... }` is a function that receives the previous state (`prev`) as an argument.
+
+4. **Creating a New Set**:  
+   `const newSet = new Set(prev);` creates a new Set from the previous state. This ensures we're not mutating the original state directly, which is important for React's state management.
+
+5. **Toggling Logic**:
+   
+   - `if (newSet.has(index))`: Checks if the Set already contains the index.
+   
+   - If it does, `newSet.delete(index)` removes it (closing the panel).
+   
+   - If it doesn't, `newSet.add(index)` adds it (opening the panel).
+
+6. **Returning New State**:  
+   `return newSet;` returns the new Set, which becomes the new state for `activePanels`.
+
+#### Why set
+
+> Using a `Set` makes the code more intuitive and performant for this particular scenario compared to alternatives like arrays or objects.
+
+In this specific use case of managing which FAQ panels are open, a `Set` is particularly apt because:
+
+- Each panel is either open or closed (binary state).
+- The order of open panels doesn't matter.
+- We need to frequently check if a specific panel is open.
+- We want to easily toggle panels without complex state management.
+
+Using a Set in this context serves several important purposes:
+
+1. **Unique Values**:  
+   <mark>A Set only stores unique values.</mark> This ensures that each FAQ item can only be in one state (open or closed) at a time. You can't accidentally add the same index twice.
+
+2. **Efficient Lookups**:  
+   Checking if an item exists in a Set (`has()` method)<mark> is very fast</mark>, with a time complexity of O(1). This makes the toggling operation quick, regardless of how many panels are open.
+
+3. **Easy Addition and Removal**:  
+   Adding (`add()`) and removing (`delete()`) items from a Set is straightforward and efficient. This simplifies the logic for toggling panels on and off.
+
+4. **Iterability**:  
+   Sets are iterable, which makes it easy to work with them in React components, especially when rendering multiple items based on their state.
+
+5. **Immutability-Friendly**:  
+   Creating a new `Set` from the previous one (`new Set(prev)`)<mark> is an easy way to maintain immutability</mark>, which is a key principle in React for efficient rendering and state management.
+
+6. **Flexible Size**:  
+   Unlike an array where you might need to keep track of indices, a `Set` can easily grow or shrink as needed without leaving "gaps" or requiring index management.
+
+7. **Clear Semantics**:  
+   Using a `Set` clearly communicates the intent: we're dealing with a collection of unique items (open panels) that can be added or removed individually.
