@@ -23,7 +23,8 @@ public class AppUser {
     private int totalScore;
     private boolean isActive;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name = "gameProgress_ID")
     private GameProgress gameProgress;
 }
 

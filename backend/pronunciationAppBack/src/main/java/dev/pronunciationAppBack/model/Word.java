@@ -1,8 +1,7 @@
 package dev.pronunciationAppBack.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 
 import java.util.List;
@@ -21,6 +20,12 @@ public class Word {
 
     @OneToMany(mappedBy = "word")
     private List<Pronunciation> pronunciations;
+
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable({@JoinColumn(name = "Category_FK")},
+    )
+
 
     public Word() {}
 
