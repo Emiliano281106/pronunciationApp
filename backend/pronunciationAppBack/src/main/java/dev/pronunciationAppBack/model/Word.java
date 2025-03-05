@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Word {
@@ -23,8 +24,10 @@ public class Word {
 
     @JsonIgnore
     @ManyToMany
-    @JoinTable({@JoinColumn(name = "Category_FK")},
-    )
+    @JoinTable(name = "word_category",
+            joinColumns = {@JoinColumn(name = "CATEGORY_FK")},
+    inverseJoinColumns = {@JoinColumn(name = "WORD_FK")})
+    private Set<Category> categories;
 
 
     public Word() {}
