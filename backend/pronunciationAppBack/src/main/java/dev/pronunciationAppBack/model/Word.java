@@ -28,6 +28,11 @@ public class Word {
             joinColumns = {@JoinColumn(name = "CATEGORY_FK")},
     inverseJoinColumns = {@JoinColumn(name = "WORD_FK")})
     private Set<Category> categories;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "LEVEL_ID")
+    private Set<Level> levels;
+
 
 
     public Word() {}

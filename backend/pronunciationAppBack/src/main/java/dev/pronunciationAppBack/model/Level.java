@@ -15,6 +15,9 @@ public class Level {
     private String name;
     private int requiredScore;
     private boolean isBlocked;
+    @OneToMany(mappedBy = "levels", cascade = CascadeType.ALL)
+    private Word word;
+
 
     public Level() {
     }
