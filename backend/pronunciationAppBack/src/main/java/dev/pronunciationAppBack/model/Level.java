@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.Set;
+
 @Entity
 public class Level {
 
@@ -15,8 +17,8 @@ public class Level {
     private String name;
     private int requiredScore;
     private boolean isBlocked;
-    @OneToMany(mappedBy = "levels", cascade = CascadeType.ALL)
-    private Word word;
+    @OneToMany(mappedBy = "level", cascade = CascadeType.ALL)
+    private Set<Word> words;
 
 
     public Level() {

@@ -17,7 +17,6 @@ public class Word {
     private String phoneticSpelling;
     private String sentence;
     private boolean isActive;
-    private int level;
 
     @OneToMany(mappedBy = "word")
     private List<Pronunciation> pronunciations;
@@ -31,7 +30,7 @@ public class Word {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "LEVEL_ID")
-    private Set<Level> levels;
+    private Level level;
 
 
 
@@ -46,7 +45,7 @@ public class Word {
         this.phoneticSpelling = phoneticSpelling;
         this.sentence = sentence;
         this.isActive = isActive;
-        this.level = level;
+
     }
 
     public List<Pronunciation> getPronunciations() {
@@ -81,10 +80,6 @@ public class Word {
         return isActive;
     }
 
-    public int getLevel() {
-        return level;
-    }
-
     public void setId(String id) {
         this.id = id;
     }
@@ -109,9 +104,7 @@ public class Word {
         isActive = active;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
+
 
     @Override
     public String toString() {
@@ -122,7 +115,6 @@ public class Word {
                 ", phoneticSpelling='" + phoneticSpelling + '\'' +
                 ", sentence='" + sentence + '\'' +
                 ", isActive=" + isActive +
-                ", level=" + level +
                 '}';
     }
 }
