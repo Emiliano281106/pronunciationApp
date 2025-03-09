@@ -51,6 +51,11 @@ public class LevelService {
         return levelRepository.existsById(id);
     }
 
+    public Level getLevelByName(String name){
+
+        return levelRepository.getLevelByName(name);
+    }
+
 }
 
 

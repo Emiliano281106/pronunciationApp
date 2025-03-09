@@ -52,9 +52,9 @@ public class LevelController {
 
         }
 
-        Level updateLevel = levelService.updateLevel(level);
+        Level updatedLevel = levelService.updateLevel(level);
 
-        return ResponseEntity.ok(level);
+        return ResponseEntity.ok(updatedLevel);
     }
 
     @DeleteMapping
@@ -76,6 +76,8 @@ public class LevelController {
 
         return  ResponseEntity.ok("Level deleted!");
     }
+
+
 
 
 
