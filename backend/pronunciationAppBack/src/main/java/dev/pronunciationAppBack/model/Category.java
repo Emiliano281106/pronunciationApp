@@ -75,4 +75,12 @@ public class Category {
     public void setWordCount(int wordCount) {
         this.wordCount = wordCount;
     }
+
+    public Set<Word> getWords() {
+        return words;
+    }
+
+    public void setWords(Set<Word> words) {
+        this.words = words;
+    }
 }

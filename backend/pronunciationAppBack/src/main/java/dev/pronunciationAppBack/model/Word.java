@@ -108,7 +108,29 @@ public class Word {
         isActive = active;
     }
 
+    public Set<Category> getCategories() {
+        return categories;
+    }
 
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
+    }
+
+    public Set<StageWord> getStageWords() {
+        return stageWords;
+    }
+
+    public void setStageWords(Set<StageWord> stageWords) {
+        this.stageWords = stageWords;
+    }
 
     @Override
     public String toString() {

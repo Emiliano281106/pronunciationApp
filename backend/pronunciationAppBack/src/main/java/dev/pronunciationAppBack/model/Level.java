@@ -71,4 +71,12 @@ public class Level {
     public void setBlocked(boolean blocked) {
         isBlocked = blocked;
     }
+
+    public Set<Word> getWords() {
+        return words;
+    }
+
+    public void setWords(Set<Word> words) {
+        this.words = words;
+    }
 }
